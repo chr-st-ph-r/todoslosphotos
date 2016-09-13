@@ -1,0 +1,19 @@
+{
+  "name": "tlp",
+  "version": "1.0.0",
+  "description": "all the photos",
+  "main": "server.js",
+  "dependencies": {
+    "consolidate": "^0.14.1",
+    "dotenv": "^2.0.0",
+    "flickrapi": "^0.6.0",
+    "mustache": "^2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
