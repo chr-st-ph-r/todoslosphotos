@@ -1,24 +1,25 @@
 var Flickr = require('../flickr');
+var request = require('request');
 
 function findAll(req, res, next) {
 	Flickr.call(function(err, flickr) {
-		flickr.photosets.getList({
+		flickr.tags.getListUser({
 			user_id: flickr.options.user_id,
-			primary_photo_extras: "url_m",
 			page: 1,
 			per_page: 500
-		}, function(err, result) {
+		}, function (err, result) {
 			if (err) {
 				console.log(err);
-				return err;
+				res.send(err);
 			} else {
-				var albums = [];
+				var tags = [];
 
-				result.photosets.photoset.forEach(function(set) {
-					albums.push(set);
+				result.who.tags.tag.forEach(function(tag) {
+					tags.push(tag._content);
 				});
 
-				res.send(JSON.stringify({"albums": albums}));
+				console.log(tags);
+				res.send(JSON.stringify({"tags": tags}));
 			}
 		});
 	});

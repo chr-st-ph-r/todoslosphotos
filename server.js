@@ -10,7 +10,7 @@ var app = express();
 app.use(express.static( __dirname ));
 
 // from http://stackoverflow.com/a/16111469
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/app');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 
