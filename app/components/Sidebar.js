@@ -7,7 +7,7 @@ var Sidebar = React.createClass({
     render() {
         return (
             <div className="sidebar">
-                <h1 onClick={this.logoClick}>todos<br />los<br />photos</h1>
+                <h1 className="stamp" onClick={this.logoClick}>todos los photos</h1>
             </div>
         );
     }

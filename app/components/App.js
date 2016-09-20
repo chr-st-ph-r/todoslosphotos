@@ -23,7 +23,7 @@ var App = React.createClass({
 		var self = this;
 		var inview = 0;
 		var primary = false;
-		
+
 		document.querySelectorAll(".brick").forEach(function(brick) {
 			if (self.isInViewport(brick)) {
 				inview++;
@@ -42,14 +42,15 @@ var App = React.createClass({
 		var self = this;
 		imagesLoaded(self.loaded, function() {
 			self.msnry.layout();
-			//console.log("loaded", self.loaded);
 			self.loaded = [];
 		});
 
 	},
 
 	getInitialState() {
-		return {"data": []};
+		return {
+			"data": [],
+		};
 	},
 
 	fetch() {
@@ -67,11 +68,13 @@ var App = React.createClass({
 		.then(function(json) {
 
 			self.setState({"data": json}, function() {
+				//console.log(this.state);
 
 				self.msnry = new Masonry('.grid', {
 					columnWidth: 2,
 					itemSelector: '.square',
-					gutter: 2
+					gutter: 2,
+					stamp: '.stamp'
 				});
 
 				//msnry.layout();
@@ -98,8 +101,7 @@ var App = React.createClass({
 	render() {
 		return (
 			<div className="main">
-				<Sidebar />
-		        <Grid data={this.state} />
+				<Lightbox data={this.state} />
 			</div>
         );
 	}
