@@ -21,6 +21,12 @@ h1 {
     min-height: 8rem;
 }
 
+@media (max-width: 600px) {
+    .square {
+        width: 50%;
+    }
+}
+
 .photo {
     cursor: zoom-in;
 }
