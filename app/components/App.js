@@ -52,7 +52,7 @@ var App = React.createClass({
 		// todo: separate functions
 		var self = this;
 		var hash = location.hash ? location.hash : "#/albums";
-		var loc = "http://localhost:5000/api/" + hash.toString().slice(2, this.length);
+		var loc = "../api/" + hash.toString().slice(2, this.length);
 
 		fetch(loc)
 
