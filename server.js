@@ -16,6 +16,8 @@ app.set('view engine', 'html');
 
 require('./routes')(app);
 
-app.listen(5000, function() {
-    console.log("Development server started on port 5000.");
+var port = process.env.PORT || 5000;
+
+app.listen(port, function() {
+    console.log("Development server started on port " + port + ".");
 });

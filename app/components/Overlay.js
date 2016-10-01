@@ -8,9 +8,17 @@ var Overlay = React.createClass({
         }
     },
 
+    getClass() {
+        if (this.props.type == "album") {
+            return "overlay album";
+        } else {
+            return "overlay photo";
+        }
+    },
+
     render() {
         return (
-            <div className="overlay hidden" onClick={this.handleClick}>
+            <div className={this.getClass()} onClick={this.handleClick}>
                 <span>
                     {this.props.text}
                 </span>

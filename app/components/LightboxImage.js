@@ -17,7 +17,7 @@ var LightboxImage = React.createClass({
     },
 
     render() {
-        //console.log(this.props);
+
         return (
             <div className="lightbox-image-container">
                 <div className="loading hidden"></div>

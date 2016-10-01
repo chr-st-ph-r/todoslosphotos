@@ -15,7 +15,7 @@ var Grid = React.createClass({
         if (data.photos) {
             return data.photos.map(function(datum, i) {
                 return (
-                    <Square pos={i} key={i} background={datum.small_url} type={"photo"} text={"+"} id={datum.id} onPhotoClick={component.props.onPhotoClick}></Square>
+                    <Square pos={i} key={i} background={datum.small_url} type={"photo"} text={""} id={datum.id} onPhotoClick={component.props.onPhotoClick}></Square>
                 );
             });
         }
@@ -30,7 +30,7 @@ var Grid = React.createClass({
         return(
             <div className="grid">
                 <div className="logo stamp">
-                    <h1 onClick={this.logoClick}>todos<br />los<br />photos</h1>
+                    <h1 onClick={this.logoClick}>todos los <span className="logo-selected">photos</span></h1>
                 </div>
                 {this.squares()}
             </div>

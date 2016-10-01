@@ -10,8 +10,8 @@ var App = React.createClass({
 		    rect.right >= 0 &&
 
 		    rect.top <= (
-		    (window.innerHeight + 1000) ||
-		    (document.documentElement.clientHeight + 1000)) &&
+		    (window.innerHeight + 500) ||
+		    (document.documentElement.clientHeight + 500)) &&
 
 		    rect.left <= (
 		    window.innerWidth ||
@@ -21,20 +21,15 @@ var App = React.createClass({
 
 	lazyLoad() {
 		var self = this;
-		var inview = 0;
-		var primary = false;
-
-		document.querySelectorAll(".brick").forEach(function(brick) {
-			if (self.isInViewport(brick)) {
-				inview++;
-
-				brick.src = brick.getAttribute('data-src');
-				self.loaded.push(brick);
-				if (!primary) self.layout();
-				if (inview > 10) primary = true;
-			}
-
-		});
+		var bricks = document.querySelectorAll('.brick');
+		var brick;
+		for (var i = 0; i < bricks.length; i++) {
+			brick = bricks[i];
+			brick.src = brick.getAttribute('data-src');
+			console.log(brick.getAttribute('data-src'));
+			self.loaded.push(brick);
+			self.layout();
+		}
 		self.layout();
 	},
 
@@ -68,19 +63,20 @@ var App = React.createClass({
 		.then(function(json) {
 
 			self.setState({"data": json}, function() {
-				//console.log(this.state);
+				//	console.log(this.state);
 
 				self.msnry = new Masonry('.grid', {
 					columnWidth: 2,
 					itemSelector: '.square',
-					gutter: 2,
 					stamp: '.stamp'
 				});
 
 				//msnry.layout();
 
 				self.lazyLoad();
-				window.addEventListener('scroll', self.lazyLoad);
+				// window.addEventListener('scroll', function() {
+				// 	console.log(window.scrollY);
+				// });
 
 				});
 
@@ -91,10 +87,14 @@ var App = React.createClass({
 		var self = this;
 		this.fetch();
 		window.onhashchange = function() {
-			document.querySelectorAll('.loading').forEach(function(loader) {
-				loader.classList.remove('hidden');
-			});
+			var loaders = document.querySelectorAll('.loading');
+
+			for (var i = 0; i < loaders.length; i++) {
+				loaders[i].classList.remove('hidden');
+			}
+
 			self.fetch();
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}
 	},
 

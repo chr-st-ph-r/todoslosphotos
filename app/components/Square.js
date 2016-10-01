@@ -1,12 +1,13 @@
 var Square = React.createClass({
 	showOverlay(evt) {
-		evt.target.parentNode.parentNode.querySelector('.overlay').classList.remove('hidden');
+		console.log("entered");
+		//evt.target.parentNode.parentNode.querySelector('.overlay').classList.remove('hidden');
 	},
 
 	hideOverlay(evt) {
-		document.querySelectorAll('.overlay').forEach(function(o) {
-			o.classList.add('hidden');
-		});
+		// document.getElementsByClassName('.overlay').forEach(function(o) {
+		// 	o.classList.add('hidden');
+		// });
 
 	},
 
