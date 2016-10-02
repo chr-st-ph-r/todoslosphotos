@@ -28,6 +28,7 @@ var Grid = React.createClass({
     },
 
     render() {
+        console.log(this.props);
         return(
             <div className="grid">
                 <div className="logo stamp">

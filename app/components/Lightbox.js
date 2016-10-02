@@ -1,13 +1,11 @@
 var Lightbox = React.createClass({
 
     openLightbox(id, pos) {
-        //console.log(pos);
         var photos = this.props.data.data.photos;
-        console.log(id === photos[pos].id);
         this.setState({
             currentImage: photos[pos],
             pos: pos,
-            isOpen: true
+            isOpen: true,
         });
     },
 
@@ -60,18 +58,35 @@ var Lightbox = React.createClass({
         });
     },
 
+    handleFullscreen() {
+        // http://www.webdesignerdepot.com/2013/03/how-to-use-the-fullscreen-api/
+        var doc = document.documentElement;
+        if (doc.requestFullscreen) {
+            doc.requestFullscreen();
+        } else if (doc.webkitRequestFullScreen) {
+            doc.webkitRequestFullScreen();
+        } else if (doc.mozRequestFullScreen) {
+            doc.mozRequestFullScreen();
+        }
+
+    },
+
+    handleKeys(evt) {
+        console.log("evt")
+    },
+
     getInitialState() {
         return {
             currentImage: "",
             isOpen: false,
-            pos: 0
+            pos: 0,
         }
     },
 
     render() {
         return (
             <div id="lightbox">
-                <LightboxViewer isOpen={this.state.isOpen} currentImage={this.state.currentImage} onClose={this.closeLightbox} onNext={this.nextPhoto} onPrev={this.prevPhoto}/>
+                <LightboxViewer isOpen={this.state.isOpen} currentImage={this.state.currentImage} onClose={this.closeLightbox} onNext={this.nextPhoto} onPrev={this.prevPhoto} onFullScreen={this.handleFullscreen} onKeyPress={this.handleKeys}/>
                 <Grid data={this.props.data} onPhotoClick={this.openLightbox}/>
             </div>
         )

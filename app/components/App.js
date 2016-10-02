@@ -55,31 +55,14 @@ var App = React.createClass({
 				//msnry.layout();
 
 				self.load();
-
-				window.addEventListener('scroll', function() {
-					console.log(window.scrollY);
-					var tinyLogo = document.querySelector('#tiny');
-					if (window.scrollY > 100) {
-						tinyLogo.classList.remove('hidden');
-						tinyLogo.classList.remove('tiny-logo-hidden');
-						tinyLogo.classList.add('tiny-logo');
-					} else {
-
-						tinyLogo.classList.add('tiny-logo-hidden');
-
-
-					}
-
-
-				});
-				});
-
 			});
+		});
 	},
 
 	componentDidMount() {
 		var self = this;
 		this.fetch();
+
 		window.onhashchange = function() {
 			var loaders = document.querySelectorAll('.loading');
 
@@ -90,6 +73,17 @@ var App = React.createClass({
 			self.fetch();
 			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}
+		
+		window.addEventListener('scroll', function() {
+			var tinyLogo = document.querySelector('#tiny');
+			if (window.scrollY > 100) {
+				tinyLogo.classList.remove('hidden');
+				tinyLogo.classList.remove('tiny-logo-hidden');
+				tinyLogo.classList.add('tiny-logo');
+			} else {
+				tinyLogo.classList.add('tiny-logo-hidden');
+			}
+		});
 	},
 
 	render() {

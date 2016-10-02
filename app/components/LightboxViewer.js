@@ -7,6 +7,9 @@ var LightboxViewer = React.createClass({
     render() {
         return (
             <div className={this.isOpen()}>
+                <div className="fullscreen lightbox-control" onClick={this.props.onFullScreen}>
+                +
+                </div>
                 <div className="close lightbox-control" onClick={this.props.onClose}>
                     x
                 </div>

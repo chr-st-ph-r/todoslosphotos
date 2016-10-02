@@ -175,31 +175,43 @@ img.lightbox-image {
 }
 
 .lightbox-control {
-    display: block;
+    /*display: block;*/
     color: rgba(255, 255, 255, 0.5);
     position: fixed;
-    padding: .1rem;
-    width: 3rem;
-    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
     cursor: pointer;
+    font-size: 5rem;
 }
 
 .next {
     right: 0;
     bottom: 0;
-    font-size: 4rem;
+    width: 50%;
+    text-align: right;
 }
 
 .prev {
     left: 0;
     bottom: 0;
-    font-size: 4rem;
+    width: 50%;
+    text-align: left;
 }
 
 .close {
     right: 0;
     top: 0;
-    font-size: 2.5rem;
+    font-size: 4rem;
+    width: 20%;
+    text-align: right;
+}
+
+.fullscreen {
+    top: 0;
+    left: 0;
+    width: 20%;
+    text-align: left;
+    font-size: 4rem;
 }
 
 .lightbox-control:hover {
