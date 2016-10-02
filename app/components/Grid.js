@@ -24,13 +24,17 @@ var Grid = React.createClass({
 
     logoClick() {
         location.hash = "";
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
 
     render() {
         return(
             <div className="grid">
                 <div className="logo stamp">
-                    <h1 onClick={this.logoClick}>todos los <span className="logo-selected">photos</span></h1>
+                    <h1 onClick={this.logoClick}>todos los photos</h1>
+                </div>
+                <div id="tiny" className="hidden" onClick={this.logoClick}>
+                    <h2>tlp</h2>
                 </div>
                 {this.squares()}
             </div>

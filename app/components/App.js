@@ -2,35 +2,16 @@ var App = React.createClass({
 
 	loaded: [],
 
-	isInViewport(el) {
-    	var rect = el.getBoundingClientRect();
-
-		return (
-		    rect.bottom >= 0 &&
-		    rect.right >= 0 &&
-
-		    rect.top <= (
-		    (window.innerHeight + 500) ||
-		    (document.documentElement.clientHeight + 500)) &&
-
-		    rect.left <= (
-		    window.innerWidth ||
-		    document.documentElement.clientWidth)
-		 );
-	},
-
-	lazyLoad() {
+	load() {
 		var self = this;
 		var bricks = document.querySelectorAll('.brick');
 		var brick;
 		for (var i = 0; i < bricks.length; i++) {
 			brick = bricks[i];
 			brick.src = brick.getAttribute('data-src');
-			console.log(brick.getAttribute('data-src'));
 			self.loaded.push(brick);
 			self.layout();
 		}
-		self.layout();
 	},
 
 	layout() {
@@ -73,11 +54,24 @@ var App = React.createClass({
 
 				//msnry.layout();
 
-				self.lazyLoad();
-				// window.addEventListener('scroll', function() {
-				// 	console.log(window.scrollY);
-				// });
+				self.load();
 
+				window.addEventListener('scroll', function() {
+					console.log(window.scrollY);
+					var tinyLogo = document.querySelector('#tiny');
+					if (window.scrollY > 100) {
+						tinyLogo.classList.remove('hidden');
+						tinyLogo.classList.remove('tiny-logo-hidden');
+						tinyLogo.classList.add('tiny-logo');
+					} else {
+
+						tinyLogo.classList.add('tiny-logo-hidden');
+
+
+					}
+
+
+				});
 				});
 
 			});

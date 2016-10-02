@@ -9,10 +9,18 @@ body {
 }
 
 h1 {
-    color: white;
+    color: darkorange;
     font-family: 'Fjalla One', sans-serif;
     padding: .75rem;
     font-size: 3rem;
+    letter-spacing: -3px;
+    text-align: center;
+}
+
+h1:hover {
+    background: darkorange;
+    color: #222;
+    animation: fadeIn .5s;
 }
 
 @media (min-width: 800px) {
@@ -94,13 +102,15 @@ img {
     width: 100%;
     text-align: center;
     font-family: 'Fjalla One', sans-serif;
-    color: rgba(255, 255, 255, 0.49);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 2.5rem;
+    text-shadow: 0px 0px 3px black;
 }
 
 .overlay:hover {
     color: white;
     background: rgba(0, 0, 0, 0.4);
+    animation: fadeIn .5s;
 }
 
 .overlay span {
@@ -110,7 +120,7 @@ img {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .lightbox-open {
@@ -126,8 +136,8 @@ img {
     border: .7rem solid gray;
     border-top-color: white;
     position: absolute;
-    top: 45%;
-    left: 50%;
+    top: 47%;
+    left: 47%;
     animation: spin 1s linear infinite;
 }
 
@@ -161,13 +171,13 @@ img.lightbox-image {
     width: 100%;
     font-family: "Fjalla One", sans-serif;
     background: #222;
+    animation: scale .4s;
 }
 
 .lightbox-control {
     display: block;
     color: rgba(255, 255, 255, 0.5);
     position: fixed;
-    /* z-index: 4; */
     padding: .1rem;
     width: 3rem;
     text-align: center;
@@ -196,6 +206,37 @@ img.lightbox-image {
     color: white;
 }
 
+.tiny-logo {
+    z-index: 1;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: darkorange;
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    font-family: 'Fjalla One', sans-serif;
+    color: #222;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 1px 1px 10px black;
+    animation: enterFromBelow .5s;
+    cursor: pointer;
+}
+
+.tiny-logo:hover {
+    background: black;
+    color: darkorange;
+}
+
+.tiny-logo-hidden {
+    bottom: -10rem;
+    animation: leaveToBelow 1s;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -205,14 +246,50 @@ img.lightbox-image {
   }
 }
 
-@keyframes enterFromRight {
+@keyframes enterFromBelow {
     0% {
-        right: -10px;
+        bottom: -10rem;
+        transform: rotate(360deg);
     }
-    50% {
-        right: 15px;
+    40% {
+        bottom: 3rem;
     }
     100% {
-        right: 10px;
+        bottom: 1rem;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes leaveToBelow {
+    0% {
+        bottom: 1rem;
+    }
+    50% {
+        bottom: -6rem;
+        transform: rotate(270deg);
+    }
+    100% {
+        bottom: -10rem;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }
