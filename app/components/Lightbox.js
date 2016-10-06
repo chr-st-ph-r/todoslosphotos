@@ -86,6 +86,7 @@ var Lightbox = React.createClass({
     render() {
         return (
             <div id="lightbox">
+                
                 <LightboxViewer isOpen={this.state.isOpen} currentImage={this.state.currentImage} onClose={this.closeLightbox} onNext={this.nextPhoto} onPrev={this.prevPhoto} onFullScreen={this.handleFullscreen} onKeyPress={this.handleKeys}/>
                 <Grid data={this.props.data} onPhotoClick={this.openLightbox}/>
             </div>

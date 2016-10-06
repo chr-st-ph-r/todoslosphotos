@@ -1,13 +1,14 @@
 //var Flickr = require('flickrapi');
 var Flickr = require('../flickr');
 var url = require('../urlBuilder');
+var rand = require('../randomize');
 
 function findAll(req, res, next) {
 	Flickr.call(function(error, flickr) {
 		flickr.photos.search({
 			user_id: flickr.options.user_id,
 			page: 1,
-			per_page: 500
+			per_page: 50
 		}, function(err, result) {
 			if (err) {
 				console.log(err);
@@ -16,10 +17,11 @@ function findAll(req, res, next) {
 				var photos = [];
 				result.photos.photo.forEach(function(photo) {
 					photo.url = url.to_url(photo);
+					photo.small_url = url.to_small_url(photo);
 					photos.push(photo);
 				});
 				console.log(photos);
-				res.send(JSON.stringify(photos));
+				res.send(JSON.stringify({"photos": photos}));
 			}
 		});
 	});
@@ -55,37 +57,65 @@ function findByAlbum(req, res, next) {
 	});
 }
 
-function findByTag(req, res, next) {
+function findNew(req, res, next) {
 	Flickr.call(function(err, flickr) {
 		if (err) {
-			console.log(err);
-			return err;
+			conosle.log(err);
+			res.send(err);
 		} else {
-			flickr.photos.search({
+			flickr.photos.recentlyUpdated({
 				user_id: flickr.options.user_id,
-				tags: req.params.tagName,
 				page: 1,
-				per_page: 500
+				per_page: 25,
+				min_date: "2016-09-01"
 			}, function(err, result) {
 				if (err) {
 					console.log(err);
-					return err;
+					res.send(err);
 				} else {
-					var photos = [];
+					photos = [];
 					result.photos.photo.forEach(function(photo) {
+						console.log(photo);
 						photo.url = url.to_url(photo);
-						photos.push(photo);
+						photo.small_url = url.to_small_url(photo);
+						photos.push(photo)
 					});
-					console.log(photos);
-					res.send(JSON.stringify(photos));
+					res.send(JSON.stringify({"photos": photos}));
 				}
 			});
 		}
 	});
 }
 
+function findRandom(req, res, next) {
+	Flickr.call(function(error, flickr) {
+		flickr.photos.search({
+			user_id: flickr.options.user_id,
+			page: 1,
+			per_page: 500
+		}, function(err, result) {
+			if (err) {
+				console.log(err);
+				return err;
+			} else {
+				var photos = [];
+				result.photos.photo.forEach(function(photo) {
+					photo.url = url.to_url(photo);
+					photo.small_url = url.to_small_url(photo);
+					photos.push(photo);
+				});
+				photos = rand.shuffle(photos).splice(0,25);
+
+				console.log(photos);
+				res.send(JSON.stringify({"photos": photos}));
+			}
+		});
+	});
+}
+
 module.exports = {
 	findAll: findAll,
 	findByAlbum: findByAlbum,
-	findByTag: findByTag
+	findNew: findNew,
+	findRandom: findRandom,
 };

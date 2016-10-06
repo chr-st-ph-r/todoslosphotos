@@ -34,6 +34,7 @@ var App = React.createClass({
 		var self = this;
 		var hash = location.hash ? location.hash : "#/albums";
 		var loc = "../api/" + hash.toString().slice(2, this.length);
+		console.log(loc);
 
 		fetch(loc)
 
@@ -73,7 +74,7 @@ var App = React.createClass({
 			self.fetch();
 			document.body.scrollTop = document.documentElement.scrollTop = 0;
 		}
-		
+
 		window.addEventListener('scroll', function() {
 			var tinyLogo = document.querySelector('#tiny');
 			if (window.scrollY > 100) {

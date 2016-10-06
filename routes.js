@@ -6,11 +6,10 @@ module.exports = function(app) {
 	var photos = require('./controllers/photos');
 	app.get('/api/photos', photos.findAll);
 	app.get('/api/photos/album/:albumID', photos.findByAlbum);
-	app.get('/api/photos/tag/:tagName', photos.findByTag);
+	app.get('/api/photos/new', photos.findNew);
+	app.get('/api/photos/random', photos.findRandom);
 
 	var albums = require('./controllers/albums');
 	app.get('/api/albums', albums.findAll);
 
-	var tags = require('./controllers/tags');
-	app.get('/api/tags', tags.findAll);
 };
